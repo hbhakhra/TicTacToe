@@ -1,3 +1,4 @@
+// dom nodes
 let board = document.querySelector('.board');
 let squares = [...document.querySelectorAll('.square')];
 let length = Math.sqrt(squares.length);
@@ -5,6 +6,10 @@ let rows = [...document.querySelectorAll('.row')]
 				.map(row => [...row.querySelectorAll('.square')]);
 let columns = computeColumns();
 let diagonals = computeDiagonals();
+
+// state
+let player1 = true;
+let isWinner = false;
 
 function computeColumns() {
 	let columns = [[],[],[]];
@@ -35,12 +40,12 @@ function computeDiagonals() {
 }
 
 function onBoardClick(event) {
+	if (isWinner) return;
 	fillSquare(event.target);
-	let isWinner = checkWin();
+	isWinner = checkWin();
 	!isWinner && checkTie();
 }
 
-let player1 = true;
 function fillSquare(node) {
 	if (node.classList.contains('filled')) {
 		return;
@@ -82,6 +87,7 @@ function checkWin() {
 
 	if (winningGroup) {
 		console.log("winner", winningGroup);
+		board.className += " win";
 		drawWin(winningGroup);
 	}
 
