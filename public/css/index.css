@@ -30,6 +30,17 @@ body {
 	cursor: default;
 }
 
+.square.filled.winner {
+	color: green;
+	font-size:110px;
+}
+
+.board.tie .square,
+.board.tie .row {
+	border-color: red;
+	border-width: 3px;
+}
+
 .square + .square {
 	border-left: 1px solid black;
 }
